@@ -3,14 +3,39 @@
     <h2>Tasks</h2>
     <ul>
       <li v-for="task in todoStore.filteredTasks" :key="task.id">
-        {{ task.text }} ({{ task.priority }})
-        <button @click="editTask(task.id)">Edit</button>
-        <button @click="deleteTask(task.id)">Delete</button>
+        <div v-if="editTaskId !== task.id">
+          {{ task.text }} ({{ task.priority }})
+          <button @click="startEditTask(task)">Edit</button>
+          <button @click="deleteTask(task.id)">Delete</button>
+        </div>
+        <div v-else>
+          <input v-model="editTaskData.text" />
+          <select v-model="editTaskData.categoryId">
+            <option
+              v-for="category in todoStore.categories"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+          <select v-model="editTaskData.priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button @click="saveTask(task.id)">Save</button>
+          <button @click="cancelEdit">Cancel</button>
+        </div>
       </li>
     </ul>
     <input v-model="newTask.text" placeholder="Type here..." />
     <select v-model="newTask.categoryId">
-      <option v-for="category in todoStore.categories" :key="category.id" :value="category.id">
+      <option
+        v-for="category in todoStore.categories"
+        :key="category.id"
+        :value="category.id"
+      >
         {{ category.name }}
       </option>
     </select>
@@ -29,6 +54,8 @@ import { useTodoStore } from '@/stores/todoStore';
 
 const todoStore = useTodoStore();
 const newTask = ref({ text: '', categoryId: 1, priority: 'low' });
+const editTaskId = ref(null);
+const editTaskData = ref({ text: '', categoryId: 1, priority: 'low' });
 
 const addTask = () => {
   if (newTask.value.text) {
@@ -37,11 +64,18 @@ const addTask = () => {
   }
 };
 
-const editTask = (id) => {
-  const newText = prompt('Enter new task text:');
-  if (newText) {
-    todoStore.editTask(id, newText);
-  }
+const startEditTask = (task) => {
+  editTaskId.value = task.id;
+  editTaskData.value = { ...task };
+};
+
+const saveTask = (id) => {
+  todoStore.editTask(id, editTaskData.value);
+  editTaskId.value = null;
+};
+
+const cancelEdit = () => {
+  editTaskId.value = null;
 };
 
 const deleteTask = (id) => {

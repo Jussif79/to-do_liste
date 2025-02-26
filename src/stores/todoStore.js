@@ -56,10 +56,10 @@ export const useTodoStore = defineStore('todo', () => {
   };
 
   // Edit a task
-  const editTask = (id, newText) => {
-    const task = tasks.value.find((t) => t.id === id);
-    if (task) {
-      task.text = newText;
+  const editTask = (id, updatedTask) => {
+    const taskIndex = tasks.value.findIndex((t) => t.id === id);
+    if (taskIndex !== -1) {
+      tasks.value[taskIndex] = { ...tasks.value[taskIndex], ...updatedTask };
     }
   };
 
