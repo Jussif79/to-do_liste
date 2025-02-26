@@ -1,17 +1,30 @@
 <template>
   <div class="home">
+    <h1>Todo App</h1>
 
-    <p>Willkommen bei einer weiteren Vue.js Test-Webapplikation.</p>
+    <!-- Filter Buttons -->
+    <FilterButtons />
 
-    <p>Im Moment kannst du hier nur <router-link :to="'/manage-category'">Kategorien</router-link> verwalten.</p>
-    
-    <p>Alles weitere folgt... 😊</p>
+    <!-- Search -->
+    <SearchBar />
 
+    <!-- Categories -->
+    <CategoryList />
+
+    <!-- Tasks -->
+    <TaskList />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Home'
-}
+<script setup>
+import FilterButtons from '@/components/FilterButtons.vue';
+import SearchBar from '@/components/SearchBar.vue';
+import CategoryList from '@/components/CategoryList.vue';
+import TaskList from '@/components/TaskList.vue';
 </script>
+
+<style scoped>
+.home {
+  padding: 20px;
+}
+</style>
