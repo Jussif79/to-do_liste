@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-import FilterButtons from '@/components/FilterButtons.vue';
-import SearchBar from '@/components/SearchBar.vue';
-import CategoryList from '@/components/CategoryList.vue';
-import TaskList from '@/components/TaskList.vue';
+import FilterButtons from "@/components/FilterButtons.vue";
+import SearchBar from "@/components/SearchBar.vue";
+import CategoryList from "@/components/CategoryList.vue";
+import TaskList from "@/components/TaskList.vue";
 </script>
