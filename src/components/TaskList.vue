@@ -117,9 +117,9 @@ import { ref } from "vue";
 import { useTodoStore } from "@/stores/todoStore";
 
 const todoStore = useTodoStore();
-const newTask = ref({ text: "", categoryId: null, priority: "low" });
+const newTask = ref({ text: "", categoryId: 1, priority: "low" });
 const editTaskId = ref(null);
-const editTaskData = ref({ text: "", categoryId: null, priority: "low" });
+const editTaskData = ref({ text: "", categoryId: 1, priority: "low" });
 
 const addTask = () => {
   if (newTask.value.text) {
