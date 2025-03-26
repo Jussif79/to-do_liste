@@ -128,7 +128,7 @@ const addTask = () => {
       newTask.value.categoryId,
       newTask.value.priority
     );
-    newTask.value = { text: "", categoryId: null, priority: "low" };
+    newTask.value = { text: "", categoryId: 1, priority: "low" };
   }
 };
 
