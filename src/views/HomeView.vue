@@ -1,16 +1,28 @@
 <template>
-  <div class="flex min-h-screen bg-gray-50">
-    <!-- Sidebar -->
-    <aside class="w-1/4 p-4 bg-white shadow-md h-screen">
-      <FilterButtons />
-      <CategoryList />
-    </aside>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Mobile layout (stacked) - shows on screens smaller than lg (1024px) -->
+    <div class="lg:hidden">
+      <aside class="w-full p-4 bg-white shadow-md">
+        <FilterButtons />
+        <CategoryList />
+      </aside>
+      <main class="w-full p-6">
+        <SearchBar />
+        <TaskList />
+      </main>
+    </div>
 
-    <!-- Main Content -->
-    <main class="w-3/4 p-6">
-      <SearchBar />
-      <TaskList />
-    </main>
+    <!-- Desktop layout (side by side) - shows on lg (1024px) and up -->
+    <div class="hidden lg:flex">
+      <aside class="w-1/4 p-4 bg-white shadow-md h-screen">
+        <FilterButtons />
+        <CategoryList />
+      </aside>
+      <main class="w-3/4 p-6">
+        <SearchBar />
+        <TaskList />
+      </main>
+    </div>
   </div>
 </template>
 

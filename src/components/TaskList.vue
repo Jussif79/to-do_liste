@@ -23,7 +23,7 @@
         <!-- Task Content -->
         <div v-if="editTaskId !== task.id" class="flex-1 min-w-0">
           <span
-            class="text-gray-800 block max-w-full truncate"
+            class="text-gray-800 block break-all"
             :class="{ 'line-through text-gray-500': task.completed }"
           >
             {{ task.text }}
@@ -126,7 +126,8 @@
       </div>
       <button
         @click="addTask"
-        class="w-full py-2 bg-green-500 text-white rounded hover:bg-green-600 font-medium"
+        :disabled="!newTask.text"
+        class="w-full py-2 bg-green-500 text-white rounded hover:bg-green-600 font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Add Task
       </button>
