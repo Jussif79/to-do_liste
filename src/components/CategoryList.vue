@@ -60,6 +60,14 @@ const cancelEdit = () => {
 };
 
 const deleteCategory = (id) => {
+  // Prüfe, ob Tasks in dieser Kategorie existieren
+  const hasTasks = todoStore.tasks.some(task => task.categoryId === id);
+
+  if (hasTasks) {
+    alert("Kategorie kann nicht gelöscht werden, da sie Tasks enthält!");
+    return;
+  }
+
   if (confirm('Are you sure you want to delete this category?')) {
     todoStore.deleteCategory(id);
   }

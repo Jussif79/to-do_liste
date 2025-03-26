@@ -11,8 +11,8 @@ export const useTodoStore = defineStore('todo', () => {
 
   // State for tasks
   const tasks = ref([
-    { id: 1, text: 'Task 1', categoryId: 1, priority: 'low', status: 'todo' },
-    { id: 2, text: 'Task 2', categoryId: 3, priority: 'high', status: 'completed' },
+    { id: 1, text: 'Task 1', categoryId: 1, priority: 'low', completed: false },
+    { id: 2, text: 'Task 2', categoryId: 3, priority: 'high', completed: true },
   ]);
 
   // State for filter
@@ -43,6 +43,13 @@ export const useTodoStore = defineStore('todo', () => {
     categories.value = categories.value.filter((cat) => cat.id !== id);
   };
 
+  const toggleTaskCompleted = (id) => {
+    const task = tasks.value.find(task => task.id === id);
+    if (task) {
+      task.completed = !task.completed;
+    }
+  };
+
   // Add a new task
   const addTask = (text, categoryId, priority) => {
     const newTask = {
@@ -70,15 +77,25 @@ export const useTodoStore = defineStore('todo', () => {
 
   // Filter tasks by status
   const filteredTasks = computed(() => {
-    let filtered = tasks.value;
-    if (filter.value !== 'all') {
-      filtered = filtered.filter((task) => task.status === filter.value);
+    let filtered = [...tasks.value];
+    
+    if (filter.value === 'completed') {
+      filtered = filtered.filter(task => task.completed);
+    } else if (filter.value === 'todo') {
+      filtered = filtered.filter(task => !task.completed);
     }
+    
+    if (filter.value === 'priority') {
+      const priorityOrder = { high: 3, medium: 2, low: 1 };
+      filtered.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
+    }
+    
     if (searchQuery.value) {
-      filtered = filtered.filter((task) =>
+      filtered = filtered.filter(task =>
         task.text.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     }
+    
     return filtered;
   });
 
@@ -107,5 +124,10 @@ export const useTodoStore = defineStore('todo', () => {
     filteredTasks,
     setFilter,
     toggleCompletion,
+    toggleTaskCompleted,
   };
-});
+},
+{
+  persist: true,
+}
+);
