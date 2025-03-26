@@ -1,26 +1,30 @@
 <template>
-  <div class="categories">
-    <ul>
-      <li v-for="category in todoStore.categories" :key="category.id" class="category-item">
-        <div v-if="editCategoryId !== category.id" class="category-content">
-          <span>{{ category.name }}</span>
-          <div class="category-actions">
-            <button @click="startEditCategory(category)" class="edit-btn">Edit</button>
-            <button @click="deleteCategory(category.id)" class="delete-btn">Delete</button>
+  <div class="p-4">
+    <h2 class="mt-4 mb-4 text-xl font-semibold text-purple-700">Category</h2>
+    <ul class="space-y-2">
+      <li 
+        v-for="category in todoStore.categories" 
+        :key="category.id" 
+        class="flex justify-between items-center bg-gray-100 p-2 rounded shadow-sm"
+      >
+        <div v-if="editCategoryId !== category.id" class="flex justify-between w-full">
+          <span class="text-gray-700 font-medium">{{ category.name }}</span>
+          <div class="space-x-2">
+            <button @click="startEditCategory(category)" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700">Edit</button>
+            <button @click="deleteCategory(category.id)" class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700">Delete</button>
           </div>
         </div>
-        <div v-else class="edit-form">
-          <input v-model="editCategoryData.name" class="edit-input" />
-          <div class="edit-actions">
-            <button @click="saveCategory(category.id)" class="save-btn">Save</button>
-            <button @click="cancelEdit" class="cancel-btn">Cancel</button>
-          </div>
+        <div v-else class="flex w-full space-x-2">
+          <input v-model="editCategoryData.name" class="border p-1 flex-1 rounded" />
+          <button @click="saveCategory(category.id)" class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-700">Save</button>
+          <button @click="cancelEdit" class="px-2 py-1 bg-gray-500 text-white rounded hover:bg-gray-700">Cancel</button>
         </div>
       </li>
     </ul>
-    <div class="add-category">
-      <input v-model="newCategory" placeholder="Add Category..." class="add-input" />
-      <button @click="addCategory" class="add-btn">Add</button>
+
+    <div class="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+      <input v-model="newCategory" placeholder="Add Category..." class="w-10 border p-2 flex-1 rounded" />
+      <button @click="addCategory" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700 w-full sm:w-auto">Add</button>
     </div>
   </div>
 </template>
@@ -61,101 +65,3 @@ const deleteCategory = (id) => {
   }
 };
 </script>
-
-<style scoped>
-.categories {
-  margin-top: 20px;
-  font-family: Arial, sans-serif;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.category-item {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.category-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.category-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.edit-form {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-
-.edit-input {
-  flex-grow: 1;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.edit-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.add-category {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.add-input {
-  flex-grow: 1;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-btn {
-  background-color: #ffc107;
-  color: white;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.save-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.cancel-btn {
-  background-color: #6c757d;
-  color: white;
-}
-
-.add-btn {
-  background-color: #007bff;
-  color: white;
-}
-</style>

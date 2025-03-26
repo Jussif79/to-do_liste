@@ -1,9 +1,9 @@
 <template>
-  <div class="search-bar">
+  <div class="my-4">
     <input 
       v-model="searchQuery" 
       placeholder="Search tasks..." 
-      class="search-input"
+      class="w-full border rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
   </div>
 </template>
@@ -19,24 +19,3 @@ watch(searchQuery, (newQuery) => {
   todoStore.searchQuery = newQuery;
 });
 </script>
-
-<style scoped>
-.search-bar {
-  margin-bottom: 20px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-</style>

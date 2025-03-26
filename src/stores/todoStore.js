@@ -82,6 +82,12 @@ export const useTodoStore = defineStore('todo', () => {
     return filtered;
   });
 
+  // Toggle task completion
+  const toggleCompletion = (id) => {
+    const task = tasks.value.find(task => task.id === id);
+    if (task) task.status = task.status === 'completed' ? 'todo' : 'completed';
+  };
+  
   // Set filter
   const setFilter = (newFilter) => {
     filter.value = newFilter;
@@ -100,5 +106,6 @@ export const useTodoStore = defineStore('todo', () => {
     deleteTask,
     filteredTasks,
     setFilter,
+    toggleCompletion,
   };
 });

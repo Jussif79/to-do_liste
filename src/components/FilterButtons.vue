@@ -1,31 +1,15 @@
 <template>
-  <div class="filters">
-    <div class="filter-row">
+  <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold text-purple-700">Filter</h2>
+    <div class="mt-3 space-y-2">
       <button 
-        @click="setFilter('all')" 
-        :class="{ active: todoStore.currentFilter === 'all' }"
+        v-for="filter in filters"
+        :key="filter.value"
+        @click="setFilter(filter.value)" 
+        class="w-full px-4 py-2 border rounded-lg hover:bg-purple-200"
+        :class="{ 'bg-gray-300': todoStore.currentFilter === filter.value }"
       >
-        All Tasks
-      </button>
-      <button 
-        @click="setFilter('todo')" 
-        :class="{ active: todoStore.currentFilter === 'todo' }"
-      >
-        To Do
-      </button>
-    </div>
-    <div class="filter-row">
-      <button 
-        @click="setFilter('completed')" 
-        :class="{ active: todoStore.currentFilter === 'completed' }"
-      >
-        Completed
-      </button>
-      <button 
-        @click="setFilter('priority')" 
-        :class="{ active: todoStore.currentFilter === 'priority' }"
-      >
-        Priority
+        {{ filter.label }}
       </button>
     </div>
   </div>
@@ -35,43 +19,14 @@
 import { useTodoStore } from '@/stores/todoStore';
 
 const todoStore = useTodoStore();
+const filters = [
+  { label: "All Tasks", value: "all" },
+  { label: "To Do", value: "todo" },
+  { label: "Completed", value: "completed" },
+  { label: "Priority", value: "priority" }
+];
 
 const setFilter = (filter) => {
   todoStore.setFilter(filter);
 };
 </script>
-
-<style scoped>
-.filters {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.filter-row {
-  display: flex;
-  gap: 10px;
-}
-
-.filters button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  background-color: #f0f0f0;
-  color: #333;
-  transition: background-color 0.3s ease;
-  flex: 1; /* Ensure buttons take equal width */
-}
-
-.filters button:hover {
-  background-color: #ddd;
-}
-
-.filters button.active {
-  background-color: #007bff;
-  color: white;
-}
-</style>
