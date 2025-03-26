@@ -64,7 +64,7 @@ const deleteCategory = (id) => {
   const hasTasks = todoStore.tasks.some(task => task.categoryId === id);
 
   if (hasTasks) {
-    alert("Kategorie kann nicht gelöscht werden, da sie Tasks enthält!");
+    alert("Cannot delete category: It contains tasks!");
     return;
   }
 
