@@ -66,7 +66,7 @@
         <input
           v-model="newCategory"
           placeholder="Add category..."
-          class="border p-2 rounded flex-1 focus:ring-2 focus:ring-blue-500"
+          class="w-10 border p-2 rounded flex-1 focus:ring-2 focus:ring-blue-500"
           @keyup.enter="addCategory"
           @input="checkAddButton"
         />
