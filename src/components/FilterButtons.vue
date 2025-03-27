@@ -6,7 +6,7 @@
         v-for="filter in filters"
         :key="filter.value"
         @click="setFilter(filter.value)"
-        class="w-full px-4 py-2 border rounded-lg hover:bg-purple-200"
+        class="w-full px-4 py-2 border rounded-lg hover:bg-purple-200 focus:outline-2 focus:outline-purple-500"
         :class="{ 'bg-gray-300': todoStore.currentFilter === filter.value }"
       >
         {{ filter.label }}
@@ -17,8 +17,8 @@
 
 <script setup>
 import { useTodoStore } from "@/stores/todoStore";
-
 const todoStore = useTodoStore();
+
 const filters = [
   { label: "All Tasks", value: "all" },
   { label: "To Do", value: "todo" },
