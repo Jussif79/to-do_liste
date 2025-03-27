@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Mobile layout (stacked) - shows on screens smaller than lg (1024px) -->
+    <!-- Mobile layout -->
     <div class="lg:hidden">
       <aside class="w-full p-4 bg-white shadow-md">
         <FilterButtons />
@@ -12,7 +12,7 @@
       </main>
     </div>
 
-    <!-- Desktop layout (side by side) - shows on lg (1024px) and up -->
+    <!-- Desktop layout -->
     <div class="hidden lg:flex">
       <aside class="w-1/4 p-4 bg-white shadow-md h-screen">
         <FilterButtons />

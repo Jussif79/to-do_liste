@@ -1,13 +1,11 @@
 <template>
   <div class="p-4">
-    <!-- Task List -->
     <ul class="space-y-3">
       <li
         v-for="task in todoStore.filteredTasks"
         :key="task.id"
         class="p-3 bg-white rounded-lg shadow-sm flex flex-col sm:flex-row gap-3 items-start sm:items-center"
       >
-        <!-- Completion Toggle -->
         <button
           @click="toggleTaskCompleted(task.id)"
           class="shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-colors"
