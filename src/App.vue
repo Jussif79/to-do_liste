@@ -3,3 +3,5 @@
     <router-view />
   </div>
 </template>
+
+// Script Logik ist in ToDoStore
